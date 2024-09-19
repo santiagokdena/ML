@@ -485,3 +485,20 @@ Example: EKG (first l:convolutional layers, last: sigmoid layer)
     dJ_dw-subs([(w,2)]) #substitute
 
 Increase or decrease is of the way $\frac{d J}{d w} \times \epsilon$, $\epsilon$ is 1 epoch.
+
+### Computation graph (Backpropagation)
+
+Backprop ocurrs from the output till the input.
+
+Chain rule:
+
+$ \frac{\partial J}{ \partial \alpha} = \frac{\partial d}{\partial \alpha} \times \frac{\partial J}{\partial d}$
+
+It's better to use derivates instead of multiplication, because computing $\frac{\partial J}{\partial \W}=$.
+
+If there are N nodes and P parameters, it's necessary to compute the derivaes in N+P steps instead of NP.
+
+*Forward-mode differentiation gave us the derivative of our output with respect to a single input, but reverse-mode differentiation gives us all of them*. 
+
+![alt text](images/image-14.png)
+![alt text](images/image-15.png)
