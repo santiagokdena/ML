@@ -25,9 +25,9 @@ The data is given, but yet not classificated or labeled. The objective is to fin
 ___
 <center>
     <b>
-        <h2>
+        <h1>
         Supervised Learning
-        </h2>
+        </h1>
     </b>
 </center>
 Training set -> Learning Algorithm -> Hypothesis function  (model)
@@ -233,9 +233,9 @@ $good: f(x)= 13x-0.23x^{2} + 0.00014x^{3}-0.001 x^{4} +10 (small values for w_{j
     ___
 <center>
     <b>
-        <h2>
+        <h1>
         Advanced Learning Algorithms
-        </h2>
+        </h1>
     </b>
 </center>
 
@@ -443,6 +443,8 @@ $\text{Cross-entropy loss} \quad loss(a_1, ..., a_N, y) = \begin{cases}
     logits=model(X)
     f_x=tf.nn.softmax(logits)
 
+"SparseCategoricalCrossentropy" indicates softmax should be included with the loss calculation by adding from_logits=True.
+
 ### Adam Moment Estimation
 
 Adam: Adaptive Moment Estimation
@@ -457,7 +459,7 @@ $b = b - \alpha_{11}\frac{d }{d b} J(\vec{w},b)$
 
     #compiling the model (add an extra argument)
 
-    model.compule(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    model.compute(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
     loss=SparseCategoricalCrossentropy(from_logits=True)
     )
 
@@ -494,7 +496,7 @@ Chain rule:
 
 $ \frac{\partial J}{ \partial \alpha} = \frac{\partial d}{\partial \alpha} \times \frac{\partial J}{\partial d}$
 
-It's better to use derivates instead of multiplication, because computing $\frac{\partial J}{\partial \W}=$.
+It's better to use derivates instead of multiplication.
 
 If there are N nodes and P parameters, it's necessary to compute the derivaes in N+P steps instead of NP.
 
@@ -502,3 +504,167 @@ If there are N nodes and P parameters, it's necessary to compute the derivaes in
 
 ![alt text](images/image-14.png)
 ![alt text](images/image-15.png)
+
+The amount of calculos gone down, auto - diferenciations are used to make calculus.
+
+## ML Diagnostic
+
+1. Evaluating the model:
+    - Use regularization in cost function from the training example, but compute the training error normal.
+    - $J(\vec{w},b)$ us the fraction of the data set that's misclassified.
+2. Traininig/Cross Val/Test Set
+    
+    - training ($60 \%$)
+    
+    - cross val ($60 \%$)
+    
+    - test set ($20 \%)
+
+    Model Sel:
+    
+    - probe with different poolynomial models, pick one. Then use the generalization error $J_{test}$ find the fit parameters
+
+3. Diagnosing bias and variance
+
+    ![alt text](images/image-16.png)
+
+    + High bias (underfit), $J_{train} \approx J_{cv}$ 
+    + High variance (overfit), $J_{cv} >> J_{train}$
+    + High variance and hight bias: $J_{train}$ will be high, $J_{cv}>>J_{train}$
+
+
+    ![alt text](images/image-16.png)
+    
+    Process: probe with different values of $\lambda$, probe the $J_{train}$, then the $J_{cv}$
+
+## Base-Line Level Performance
+
+The evaluation of the performance is based on the normal or the baseline level of perfor mance.
+
+- Bias: Training error large
+- Variance: Difference between CV error and Training error
+
+### Curves in High Bias
+
+- Linear $f=wx+b$
+
+![alt text](images/image-18.png)
+
+Getting more training data will not help much in error.
+
+    - Try getting additional features
+    - Try addubg polynomial features
+    - Try decreasing $\lambda$ 
+###  Curves in High Variance
+
+![alt text](images/image-19.png)
+
+Getting more training data will likely help to reduce the error.
+ 
+    - Get more training examples
+    - Try smaller sets of features
+    - Increasing $\lambda$
+
+### Bias in NN
+
+Large NN are low bias machines.
+
+    
+![alt text](images/image-20.png)
+
+Large NN is better as regularization is chosen appropriately. 
+    
+### Iterative Loop of ML development
+
+1. Choose architecture
+2. Train Model
+3. Diagnostics
+
+### Error Analysis (Bias, Variance and Email)
+
+Manually examine examples and catogirze them based on common traits. 
+
+### Adding data 
+
+- Add more data of everything
+- Add more specific data
+- Data Augmentation: modifying an existing training example to create a new training example!: works instroducing random noise in the data
+    example: background noise, cellphone connection
+
+Example:
+    
+    Artifical data synthesis for photo OCR
+
+$AI = Code + Data$
+
+Model centric, Data centric
+
+### Transfer Learning  
+
+    Option 1: Only Train Output Layers Parameters 
+    Option 2: Train all parameters
+
+1. Supervised Pretraining
+2. Fine Tuning
+
+![alt text](images/image-21.png)
+
+
+In deployment, software engineers use MLOps (machine learning operations) 
+
+### Error metrics for skewed datasets
+
+- Precision/Recall
+
+![alt text](images/image-22.png)
+Both should be high
+
++ Precision: $\frac{TP}{TP+FP}$
++ Recall: $\frac{TP}{TP+FN}$
+    
+![alt text](images/image-22.png)
+
+Normally, the threshold is picked manually: $f_{\vec{w},b}(\vec {x}) \geq threshold$
+
+- F1 score = $\frac{2}{(\frac{1}{R}+\frac{1}{P})}$ (Harmonic Mean)
+
+![alt text](images/image-23.png)
+
+### Decision Trees
+
+![alt text](images/image-24.png)
+
+1. How to choose what feature to split on each node?
+
+The one that maximizes purity.
+
+2. When stop splitting?
+
+-When a node is $100\ %$ one class
+
+-When splitting a node will result in the tree exceeding the maximum depth
+
+-When improvements are below a threshold
+
+### Entropy as measure of impurity
+
+$p_{0}=1-p_{1}$
+
+$H(p_{1})=-p_{1}log_{2}(p_{1})-p_{0}log_{2}(1-p_{1})$
+
+
+H is the function that represents the purity, the idea is to maximize it. p are the probabilities of succes in the last last split.
+
+$p_{1},p_{2}$
+
+$H(p_{1}),H(p_{2})$
+
+Reduction by the information gain:
+
+$H(0.5)-\frac{N_1}{N_1 + N_2} H(p_1) + \frac{N_2}{N_2 + N_1} H(p_2)$
+
+
+$\frac{N_1}{N_1 + N_2} = w$
+
+
+![alt text](images/image-25.png)
