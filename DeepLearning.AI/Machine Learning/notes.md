@@ -668,3 +668,47 @@ $\frac{N_1}{N_1 + N_2} = w$
 
 
 ![alt text](images/image-25.png)
+
+### Decision Tree Learning
+
+Using recursive algorithms for finding the best splitting. 
+
+![alt text](image s/image-26.png)
+
+
+### How to ensemble Threes?
+
+- Sampling with replacement: 
+
+## Random Forest Algorithm
+
+ 
+1. Randomizing the feature choice: at each node, when choosing a feature to split. Pick a random subset of $k<n$ and allow the algorithm to choose from that subset.
+
+$k=\sqrt n$
+
+## Boosted Decision Tree (XGBoost) -> eXtreme Graient Boosting
+
+Look at the decision trees wich aren´t doing well on.
+
+- Open source implementation of boosted trees
+
+- Highly competitive
+
+Assign different weights to different examples, rather than "sampling with replacement". 
+
+## Decision Trees vs Neuronal Networks
+
+- Decision Trees - Tree Ensambles
+
+    They work well on tabular data.
+    Not for unstructured data (images,audio, text)
+    Fast
+    Human interpretable
+
+- Neuronal Networks
+
+    Works well on all types of data: structured and unstructured data.
+    Slower than a decision tree (take long time)
+    Works with transfer learning
+    With a system of multiple models, it's easir to string together different NN.
