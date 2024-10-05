@@ -712,3 +712,62 @@ Assign different weights to different examples, rather than "sampling with repla
     Slower than a decision tree (take long time)
     Works with transfer learning
     With a system of multiple models, it's easir to string together different NN.
+
+--
+# Unsupervised Learning
+
+## Density Estimation
+
+Estimate the mean of feature $x_{1}$.
+
+$p(\vec{x})=p(\vec{x_1},\mu _{1},\sigma _{1} ^{2})*p(\vec{x_2},\mu _{2},\sigma _{2} ^{2})...$
+
+$=\prod _{j=1} p(x_{j},\mu _{j},\sigma _{j} ^{2})$
+
+### Anomaly Detection Algorithm
+
+1. Choose the n features $x_{i}$ that might be anomalous.
+2. Fit parameters
+3. Find p(x): 
+
+$p(x) = \prod_{j=1}^{n} p(x_j; \mu_j, \sigma_j^2) = \prod_{j=1}^{n} \frac{1}{\sqrt{2\pi\sigma_j^2}} \exp(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2})$
+
+If $p(x)<\epsilon -> anomaly$
+
+How to choose $\epsilon$?.
+
+Tune $\epsilon,x_{j}$:
+
+1. With CV and Test 
+2. Just with CV (few labeled anomalous examples) -> higher risk of overfitting.
+
+Metrics:
+    - True positive, false positive, false positive, true negative
+    - Precision/Recall
+    - F1 score
+### Anomaly vs Supervised Learning
+
+
++ Anomaly: Hard to learn from positive examples
+    - Fraud Detection
+    - Manufacturing: **Unseen Errors**
+    - Monitoring Machines
++ Supervised: Easy to learn from many positive examples
+    - Email spam classification
+    - Manufacturing: finding known seen diferenciations
+    - Weather prediction
+    - Deseases 
+
+**Features to choose**
+
+Transform non shape figure :
+$x_{1} = x_{1} **0.3$
+$x_{2} = log(x_{2}+1)$
+
+**Error Analysis for Anomaly Detection**
+
+1. View p(x)
+2. Plot categories $x_{i}$ and view anomalies
+
+
+$J(w^{(1)}, ..., w^{(nu)}, b^{(1)}, ..., b^{(nu)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i=1}^{r(j)} ((w^{(j)} \cdot x^{(j)}_i) + b^{(j)} - y^{(j)}_i)^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^{n_u} (w^{(j)}_k)^2$
