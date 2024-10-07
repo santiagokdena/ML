@@ -771,3 +771,21 @@ $x_{2} = log(x_{2}+1)$
 
 
 $J(w^{(1)}, ..., w^{(nu)}, b^{(1)}, ..., b^{(nu)}) = \frac{1}{2} \sum_{j=1}^{n_u} \sum_{i=1}^{r(j)} ((w^{(j)} \cdot x^{(j)}_i) + b^{(j)} - y^{(j)}_i)^2 + \frac{\lambda}{2} \sum_{j=1}^{n_u} \sum_{k=1}^{n_u} (w^{(j)}_k)^2$
+
+$w_{i}^{(j+1)}=w_{i}^{(j)}-\alpha \frac{\partial}{\partial w_{i}^{j}} J(w,b,x)$
+
+$b_{i}^{(j+1)}=b_{i}^{(j)}-\alpha \frac{\partial}{\partial b_{i}^{j}} J(w,b,x)$
+
+$x_{k}^{(i)}=x_{k}^{(i)}-\alpha \frac{\partial}{\partial x_{k}^{(i)}} J(w,b,x)$
+
+Cost function aggrupated:
+
+### Colaborative Filtering Algorithm
+
+$\frac{1}{2} \sum _{(i,j):r(i,j)=1} (w^{(j)}\cdot x^{(i)}+b^{(i)-y^{(i,j)}})+\frac{\lambda}{2} \sum \sum (w_{k}^{(j)})^{2} + \frac{\lambda}{2} \sum \sum (w_{k}^{(j)})^{2}$
+
+k:samples of w and k
+i:iteration over the real categories (x)
+j:iteraton over the model features (w,b)
+
+### Binary labels
