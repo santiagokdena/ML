@@ -673,7 +673,7 @@ $\frac{N_1}{N_1 + N_2} = w$
 
 Using recursive algorithms for finding the best splitting. 
 
-![alt text](image s/image-26.png)
+![alt text](images/image-26.png)
 
 
 ### How to ensemble Threes?
